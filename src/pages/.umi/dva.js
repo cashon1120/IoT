@@ -20,13 +20,13 @@ export function _onCreate() {
     app.use(plugin);
   });
   
-  app.model({ namespace: 'carInfo', ...(require('/Users/cashon/Documents/work/LoT/src/models/carInfo.ts').default) });
-app.model({ namespace: 'global', ...(require('/Users/cashon/Documents/work/LoT/src/models/global.ts').default) });
-app.model({ namespace: 'login', ...(require('/Users/cashon/Documents/work/LoT/src/models/login.ts').default) });
-app.model({ namespace: 'setting', ...(require('/Users/cashon/Documents/work/LoT/src/models/setting.ts').default) });
-app.model({ namespace: 'system', ...(require('/Users/cashon/Documents/work/LoT/src/models/system.ts').default) });
-app.model({ namespace: 'user', ...(require('/Users/cashon/Documents/work/LoT/src/models/user.ts').default) });
-app.model({ namespace: 'voltage', ...(require('/Users/cashon/Documents/work/LoT/src/models/voltage.ts').default) });
+  app.model({ namespace: 'device', ...(require('/Users/cashon/Documents/work/IoT/src/models/device.ts').default) });
+app.model({ namespace: 'global', ...(require('/Users/cashon/Documents/work/IoT/src/models/global.ts').default) });
+app.model({ namespace: 'login', ...(require('/Users/cashon/Documents/work/IoT/src/models/login.ts').default) });
+app.model({ namespace: 'product', ...(require('/Users/cashon/Documents/work/IoT/src/models/product.ts').default) });
+app.model({ namespace: 'setting', ...(require('/Users/cashon/Documents/work/IoT/src/models/setting.ts').default) });
+app.model({ namespace: 'system', ...(require('/Users/cashon/Documents/work/IoT/src/models/system.ts').default) });
+app.model({ namespace: 'user', ...(require('/Users/cashon/Documents/work/IoT/src/models/user.ts').default) });
   return app;
 }
 

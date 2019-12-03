@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import {Card, message, Modal, Button} from 'antd';
+import {Card, message, Button} from 'antd';
 import {connect} from 'dva';
 import 'antd/dist/antd.css';
 import StandardTable from '@/components/StandardTable';
 import {ConnectProps, ConnectState} from '@/models/connect';
 import moment from 'moment';
 import AddNew from './AddNew'
-const { confirm } = Modal;
 
 interface IProps extends ConnectProps {
   data?: any;
-  loading?: boolean
+  loading?: boolean;
+  allApp : any
 }
 
 interface IState {
@@ -27,7 +27,7 @@ interface IState {
   };
 }
 
-class UserInfoList extends Component < IProps,
+class RegDevice extends Component < IProps,
 IState > {
   state = {
     loading: false,
@@ -49,26 +49,53 @@ IState > {
   columns = [
     {
       title: '状态',
-      dataIndex: 'name',
-      key: 'name'
+      dataIndex: 'status',
+      key: 'status',
+      render: (status : number) => {
+        let text = ''
+        switch (status) {
+          case 0:
+            text = '未激活'
+            break;
+          case 1:
+            text = '在线'
+            break;
+          case 2:
+            text = '离线'
+            break;
+          default:
+            text = '异常'
+            break;
+        }
+        return text
+      }
     }, {
       title: '设备识别码',
-      dataIndex: 'sex',
-      key: 'sex',
-    },  {
+      dataIndex: 'deviceCode',
+      key: 'deviceCode'
+    }, {
       title: '设备ID',
-      dataIndex: 'birth_time',
-      key: 'birth_time'
-    }, 
-    {
+      dataIndex: 'deviceId',
+      key: 'deviceId'
+    }, {
       title: '创建时间',
-      dataIndex: 'graduation_time',
-      key: 'graduation_time'
+      dataIndex: 'crtAt',
+      key: 'crtAt'
     }
   ];
 
   componentDidMount() {
     this.initData();
+    const {allApp, dispatch} = this.props
+    if (allApp.length === 0 && dispatch) {
+      dispatch({
+        type: 'global/appList',
+        payload: {
+          pageSize: 100,
+          pageNumber: 1
+        }
+      });
+    }
   }
 
   handleTriggerModal = () => {
@@ -110,7 +137,7 @@ IState > {
 
     if (dispatch) {
       dispatch({
-        type: 'userInfo/fetch',
+        type: 'device/registerDeviceList',
         payload: {
           sysUserId: sessionStorage.getItem('sysUserId'),
           ...searchParams,
@@ -129,12 +156,12 @@ IState > {
   // 搜索
   handleSearch = (values : any) => {
     const {searchData} = this.state
-    let startTime: string | undefined = undefined
-    let endTime: string | undefined = undefined
-    if(values.times){
+    let startTime : string | undefined = undefined
+    let endTime : string | undefined = undefined
+    if (values.times) {
       startTime = moment(values.times[0]).format('YYYY-MM-DD')
       endTime = moment(values.times[1]).format('YYYY-MM-DD')
-  }
+    }
     delete values.times
     this.setState({
       searchData: {
@@ -160,8 +187,8 @@ IState > {
   // 导出详情
   exportFiel = () => {
     const {dispatch} = this.props;
-    const { selectedRowKeys } = this.state
-    if(selectedRowKeys.length === 0){
+    const {selectedRowKeys} = this.state
+    if (selectedRowKeys.length === 0) {
       message.error('请勾选要导出的数据')
       return
     }
@@ -170,66 +197,34 @@ IState > {
     }
   }
 
-  hadleCheckOut = (id: string, type: number) => {
-    const { dispatch } = this.props
-    const callback = (res: any) => {
-      if(res.success){
-        message.success('操作成功')
-      }else{
-        message.error(res.data)
-      }
-    }
-    let info = '审核通过后，考生即可扫描二维码考试，是否通过审核'
-    if(type === 2){
-      info = '确定要拒绝通过吗?'
-    }
-    confirm({
-      title: '审核信息',
-      content: info,
-      onOk: () => {
-        if(dispatch){
-        dispatch({
-          type: 'userInfo/checkOut',
-          payload: {
-            deliveryId: id,
-            state: type,
-          },
-          callback,
-        });
-      }
-      },
-    });
-  }
-
   render() {
-    const {data, loading} = this.props;
+    const {data, loading, allApp} = this.props;
     const {selectedRowKeys, modalVisible, modalData} = this.state;
     return (
-        <Card>
-                 <div className="flex-container">
-          <div className="flex-1">
-          </div>
+      <Card>
+        <div className="flex-container">
+          <div className="flex-1"></div>
           <div>
             <Button type="primary" onClick={this.handleAddNew}>注册</Button>
           </div>
         </div>
-          <StandardTable
-            // showSelectRow={true}
-            rowKey="id"
-            columns={this.columns}
-            data={data || []}
-            loading={loading}
-            onChangeCombine={(params : object) => this.initData(params)}
-            onSelectRow={this.handleSelectRows}
-            selectedRowKeys={selectedRowKeys}/>
-          <AddNew
+        <StandardTable
+          rowKey="id"
+          columns={this.columns}
+          data={data || []}
+          loading={loading}
+          onChangeCombine={(params : object) => this.initData(params)}
+          onSelectRow={this.handleSelectRows}
+          selectedRowKeys={selectedRowKeys}/>
+        <AddNew
           modalVisible={modalVisible}
           modalData={modalData}
           onCancel={this.handleTriggerModal}
+          allApp={allApp}
           onOk={this.handleSubmitModal}/>
-        </Card>
+      </Card>
     );
   }
 }
 
-export default connect(({global} : ConnectState) => ({voltageData: global.voltageData, typeData: global.typeData, driverData: global.driverData}))(UserInfoList);
+export default connect(({device, loading, global} : ConnectState) => ({data: device.registerDevice, loading: loading.models.device, allApp: global.appListData}))(RegDevice);

@@ -16,10 +16,7 @@ interface IProps extends ConnectProps {
 interface IState {
   loading : boolean;
   modalVisible : boolean;
-  imgDetailVisible : boolean;
-  imgUrl : string;
   modalData : any,
-  selectedRowKeys : any[];
   searchData : {
     [key : string]: any
   };
@@ -29,20 +26,14 @@ interface IState {
   };
 }
 
-class Company extends Component < IProps,
+class Product extends Component < IProps,
 IState > {
   state = {
     loading: false,
     modalVisible: false,
-    imgDetailVisible: false,
-    imgUrl: '',
     modalData: {},
-    selectedRowKeys: [],
     searchData: {
-      name: '',
-      status: '',
-      startTime: '',
-      endTime: ''
+      appName: ''
     },
     pageInfo: {
       pageSize: 10,
@@ -53,34 +44,35 @@ IState > {
   columns = [
     {
       title: '产品名称',
-      dataIndex: 'company_name',
-      key: 'company_name'
+      dataIndex: 'appName',
+      key: 'appName'
     },{
       title: '型号',
-      dataIndex: 'company_name',
-      key: 'company_name'
+      dataIndex: 'model',
+      key: 'model'
     },{
       title: '设备类型',
-      dataIndex: 'company_name',
-      key: 'company_name'
+      dataIndex: 'equipmentType',
+      key: 'equipmentType'
     },{
       title: '厂商名称',
-      dataIndex: 'company_name',
-      key: 'company_name'
+      dataIndex: 'tradeNames',
+      key: 'tradeNames'
     },{
       title: '协议类型',
-      dataIndex: 'company_name',
-      key: 'company_name'
+      dataIndex: 'protocol',
+      key: 'protocol',
+      render: (protocol: number) => protocol === 1 ? '808' : 'MQTT'
     }, {
       title: '创建时间',
-      dataIndex: 'company_name',
-      key: 'company_name'
+      dataIndex: 'crtAt',
+      key: 'crtAt'
     }, {
       title: '操作',
       width: 300,
       render: (record : any) => (
         <div className="table-operate">
-          <a onClick={() => this.handleEdit(record)}>修改</a>
+          <a onClick={() => this.handleEdit(record)}>详情</a>
           <a onClick={() => this.handleDel(record.id)}>删除</a>
         </div>
       )
@@ -97,40 +89,6 @@ IState > {
       modalVisible: !modalVisible
     });
   };
-
-  handleSetImg = (id : number) => {
-    const {dispatch} = this.props;
-    const callback = (res : any) => {
-      if (res.success) {
-        message.success('操作成功')
-        this.initData()
-      } else {
-        message.error(res.data)
-      }
-    }
-    if (dispatch) {
-      dispatch({
-        type: 'company/setImg',
-        payload: {
-          sysUserId: id
-        },
-        callback
-      });
-    }
-  }
-
-  // 显示二维码大图
-  handleShowImgDetail = (imgUrl?: string) => {
-    const {imgDetailVisible} = this.state
-    if (imgDetailVisible) {
-      this.setState({imgDetailVisible: false})
-    } else {
-      if (imgUrl) {
-        this.setState({imgUrl, imgDetailVisible: true})
-      }
-    }
-
-  }
 
   // 加载数据
   initData(params?: any) {
@@ -155,7 +113,7 @@ IState > {
 
     if (dispatch) {
       dispatch({
-        type: 'company/fetch',
+        type: 'product/appList',
         payload: {
           sysUserId: sessionStorage.getItem('sysUserId'),
           ...searchParams,
@@ -170,7 +128,7 @@ IState > {
     const serarchColumns = [
       {
         title: '搜索',
-        dataIndex: 'name',
+        dataIndex: 'appName',
         componentType: 'Input'
       }
     ];
@@ -203,11 +161,11 @@ IState > {
   handleDel = (id : string) => {
     const {dispatch} = this.props
     const callback = (res : any) => {
-      if (res.success) {
+      if (res.code === 1) {
         message.success('操作成功')
         this.initData()
       } else {
-        message.error(res.data)
+        message.error(res.msg)
       }
     }
     confirm({
@@ -216,10 +174,10 @@ IState > {
       onOk: () => {
         if (dispatch) {
           dispatch({
-            type: 'company/del',
+            type: 'product/delApp',
             payload: {
               sysUserId: sessionStorage.getItem('sysUserId'),
-              selectedUserId: id
+              id
             },
             callback
           });
@@ -281,4 +239,4 @@ IState > {
 
 
 
-export default connect(({voltage, loading, global} : ConnectState) => ({data: voltage.data, loading: loading.models.voltage, userData: global.userData}))(Company);
+export default connect(({product, loading} : ConnectState) => ({data: product.data, loading: loading.models.product}))(Product);

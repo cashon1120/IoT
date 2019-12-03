@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Card, message, Modal} from 'antd';
 import {connect} from 'dva';
 import 'antd/dist/antd.css';
-import Link from 'umi/link';
 import StandardTable from '@/components/StandardTable';
 import TableSearch from '../../components/TableSearch';
 import {ConnectProps, ConnectState} from '@/models/connect';
@@ -27,7 +26,7 @@ interface IState {
   };
 }
 
-class UserInfoList extends Component < IProps,
+class Device extends Component < IProps,
 IState > {
   state = {
     loading: false,
@@ -48,39 +47,37 @@ IState > {
   columns = [
     {
       title: '设备名称',
-      dataIndex: 'name',
-      key: 'name'
+      dataIndex: 'deviceName',
+      key: 'deviceName'
     }, {
       title: '设备识别码',
-      dataIndex: 'sex',
-      key: 'sex',
-      render: (sex: number) => <span>{sex===1 ? '女': sex=== 0 ? '男' : '未知'}</span>
+      dataIndex: 'deviceCode',
+      key: 'deviceCode'
     },  {
       title: '设备类型',
-      dataIndex: 'birth_time',
-      key: 'birth_time'
+      dataIndex: 'equipmentType',
+      key: 'equipmentType'
     }, 
     {
       title: '厂商名称',
-      dataIndex: 'graduation_time',
-      key: 'graduation_time'
+      dataIndex: 'tradeNames',
+      key: 'tradeNames'
     },{
       title: '协议类型',
-      dataIndex: 'education',
-      key: 'education'
+      dataIndex: 'protocol',
+      key: 'protocol',
+      render: (protocol: number) => protocol === 1 ? '808' : 'MQTT'
     }, {
       title: '创建时间',
-      dataIndex: 'profession_name',
-      key: 'profession_name',
+      dataIndex: 'crtAt',
+      key: 'crtAt',
     },{
       title: '操作',
       width: 80,
       render: (record: any) => (
         <div className="table-operate">
-          <Link to={`/userInfo/detail/${record.id}`}>详情</Link>
-          {/* <a onClick={() => this.hadleCheckOut(record.id, 3)}>通过审核</a>
-          <a onClick={() => this.hadleCheckOut(record.id, 2)}>不通过</a> */}
-        </div>
+        <a onClick={() => this.handleDel(record.id)}>删除</a>
+      </div>
       )
     }
   ];
@@ -95,6 +92,34 @@ IState > {
       modalVisible: !modalVisible
     });
   };
+
+  handleDel = (id : string) => {
+    const {dispatch} = this.props
+    const callback = (res : any) => {
+      if (res.code === 1) {
+        message.success('操作成功')
+        this.initData()
+      } else {
+        message.error(res.msg)
+      }
+    }
+    confirm({
+      title: '系统提示',
+      content: '确认要删除该设备吗?',
+      onOk: () => {
+        if (dispatch) {
+          dispatch({
+            type: 'device/delDevice',
+            payload: {
+              sysUserId: sessionStorage.getItem('sysUserId'),
+              id
+            },
+            callback
+          });
+        }
+      }
+    });
+  }
 
   handleSelectRows = (selectedRowKeys : any[]) => {
     this.setState({selectedRowKeys})
@@ -123,7 +148,7 @@ IState > {
 
     if (dispatch) {
       dispatch({
-        type: 'userInfo/fetch',
+        type: 'device/deviceAll',
         payload: {
           sysUserId: sessionStorage.getItem('sysUserId'),
           ...searchParams,
@@ -289,4 +314,5 @@ IState > {
   }
 }
 
-export default connect(({global} : ConnectState) => ({voltageData: global.voltageData, typeData: global.typeData, driverData: global.driverData}))(UserInfoList);
+
+export default connect(({device, loading} : ConnectState) => ({data: device.deviceData, loading: loading.models.device}))(Device);

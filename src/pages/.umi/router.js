@@ -3,7 +3,7 @@ import { Router as DefaultRouter, Route, Switch } from 'react-router-dom';
 import dynamic from 'umi/dynamic';
 import renderRoutes from 'umi/lib/renderRoutes';
 import history from '@tmp/history';
-import RendererWrapper0 from '/Users/cashon/Documents/work/LoT/src/pages/.umi/LocaleWrapper.jsx';
+import RendererWrapper0 from '/Users/cashon/Documents/work/IoT/src/pages/.umi/LocaleWrapper.jsx';
 import _dvaDynamic from 'dva/dynamic';
 
 const Router = require('dva/router').routerRedux.ConnectedRouter;
@@ -15,7 +15,7 @@ const routes = [
       ? _dvaDynamic({
           component: () =>
             import(/* webpackChunkName: "layouts__UserLayout" */ '../../layouts/UserLayout'),
-          LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+          LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
             .default,
         })
       : require('../../layouts/UserLayout').default,
@@ -27,7 +27,7 @@ const routes = [
           ? _dvaDynamic({
               component: () =>
                 import(/* webpackChunkName: "p__Login" */ '../Login'),
-              LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+              LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                 .default,
             })
           : require('../Login').default,
@@ -36,7 +36,7 @@ const routes = [
       {
         component: () =>
           React.createElement(
-            require('/Users/cashon/Documents/work/LoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
+            require('/Users/cashon/Documents/work/IoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
               .default,
             { pagesPath: 'src/pages', hasRoutesInConfig: true },
           ),
@@ -50,7 +50,7 @@ const routes = [
       ? _dvaDynamic({
           component: () =>
             import(/* webpackChunkName: "layouts__BasicLayout" */ '../../layouts/BasicLayout'),
-          LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+          LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
             .default,
         })
       : require('../../layouts/BasicLayout').default,
@@ -63,7 +63,7 @@ const routes = [
           ? _dvaDynamic({
               component: () =>
                 import(/* webpackChunkName: "p__Product__List" */ '../Product/List'),
-              LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+              LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                 .default,
             })
           : require('../Product/List').default,
@@ -81,7 +81,7 @@ const routes = [
               ? _dvaDynamic({
                   component: () =>
                     import(/* webpackChunkName: "p__Device__List" */ '../Device/List'),
-                  LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+                  LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                     .default,
                 })
               : require('../Device/List').default,
@@ -94,7 +94,7 @@ const routes = [
               ? _dvaDynamic({
                   component: () =>
                     import(/* webpackChunkName: "p__Device__Reg" */ '../Device/Reg'),
-                  LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+                  LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                     .default,
                 })
               : require('../Device/Reg').default,
@@ -103,7 +103,7 @@ const routes = [
           {
             component: () =>
               React.createElement(
-                require('/Users/cashon/Documents/work/LoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
+                require('/Users/cashon/Documents/work/IoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
                   .default,
                 { pagesPath: 'src/pages', hasRoutesInConfig: true },
               ),
@@ -122,7 +122,7 @@ const routes = [
               ? _dvaDynamic({
                   component: () =>
                     import(/* webpackChunkName: "p__System__Partment" */ '../System/Partment'),
-                  LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+                  LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                     .default,
                 })
               : require('../System/Partment').default,
@@ -135,7 +135,7 @@ const routes = [
               ? _dvaDynamic({
                   component: () =>
                     import(/* webpackChunkName: "p__System__User" */ '../System/User'),
-                  LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+                  LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                     .default,
                 })
               : require('../System/User').default,
@@ -148,7 +148,7 @@ const routes = [
               ? _dvaDynamic({
                   component: () =>
                     import(/* webpackChunkName: "p__System__Role" */ '../System/Role'),
-                  LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+                  LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                     .default,
                 })
               : require('../System/Role').default,
@@ -157,7 +157,7 @@ const routes = [
           {
             component: () =>
               React.createElement(
-                require('/Users/cashon/Documents/work/LoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
+                require('/Users/cashon/Documents/work/IoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
                   .default,
                 { pagesPath: 'src/pages', hasRoutesInConfig: true },
               ),
@@ -169,7 +169,7 @@ const routes = [
           ? _dvaDynamic({
               component: () =>
                 import(/* webpackChunkName: "p__404" */ '../404'),
-              LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+              LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
                 .default,
             })
           : require('../404').default,
@@ -178,7 +178,7 @@ const routes = [
       {
         component: () =>
           React.createElement(
-            require('/Users/cashon/Documents/work/LoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
+            require('/Users/cashon/Documents/work/IoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
               .default,
             { pagesPath: 'src/pages', hasRoutesInConfig: true },
           ),
@@ -189,7 +189,7 @@ const routes = [
     component: __IS_BROWSER
       ? _dvaDynamic({
           component: () => import(/* webpackChunkName: "p__404" */ '../404'),
-          LoadingComponent: require('/Users/cashon/Documents/work/LoT/src/components/PageLoading/index')
+          LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
             .default,
         })
       : require('../404').default,
@@ -198,7 +198,7 @@ const routes = [
   {
     component: () =>
       React.createElement(
-        require('/Users/cashon/Documents/work/LoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
+        require('/Users/cashon/Documents/work/IoT/node_modules/_umi-build-dev@1.11.3@umi-build-dev/lib/plugins/404/NotFound.js')
           .default,
         { pagesPath: 'src/pages', hasRoutesInConfig: true },
       ),

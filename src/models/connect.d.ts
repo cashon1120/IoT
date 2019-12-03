@@ -6,18 +6,18 @@ import { GlobalModelState } from './global';
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 import { UserModelState } from './user';
 import { LoginModelState } from './login';
-import { VoltageModelState } from './voltage';
+import { ProductModelState } from './product';
 import { SystemModelState } from './system';
-import { CarInfoModelState } from './carInfo';
+import { DeviceModelState } from './device';
 
 export {
   GlobalModelState,
   SettingModelState,
   UserModelState,
   LoginModelState,
-  VoltageModelState,
+  ProductModelState,
   SystemModelState,
-  CarInfoModelState,
+  DeviceModelState,
 };
 
 export interface Loading {
@@ -27,9 +27,9 @@ export interface Loading {
     global?: boolean;
     user?: boolean;
     login?: boolean;
-    carInfo?: boolean;
+    device?: boolean;
     system?: boolean
-    voltage?: boolean
+    product?: boolean
   };
 }
 
@@ -38,9 +38,9 @@ export interface ConnectState {
   user: UserModelState;
   loading: Loading;
   settings: SettingModelState;
-  carInfo: CarInfoModelState;
+  device: DeviceModelState;
   system: SystemModelState
-  voltage: VoltageModelState
+  product: ProductModelState
 }
 
 export type Effect = (
