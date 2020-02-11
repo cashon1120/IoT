@@ -20,7 +20,7 @@ const isAntDesignProOrDev = () : boolean => {
 };
 
 // 限制非法字符输入,[中文,英文,数字,_]
-const legalStr = /^[A-Za-z0-9\u4e00-\u9fa5\_\#\.\.\-\·\ \:\/]+$/;
+const legalStr = /^[A-Za-z0-9\u4e00-\u9fa5\_\#\@\.\.\-\·\ \:\/]+$/;
 
 // 判断性别
 const formatSex = (sexType : number) => {

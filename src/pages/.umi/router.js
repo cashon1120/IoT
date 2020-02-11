@@ -116,19 +116,6 @@ const routes = [
         icon: 'team',
         routes: [
           {
-            path: '/system/partment',
-            name: 'partment',
-            component: __IS_BROWSER
-              ? _dvaDynamic({
-                  component: () =>
-                    import(/* webpackChunkName: "p__System__Partment" */ '../System/Partment'),
-                  LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
-                    .default,
-                })
-              : require('../System/Partment').default,
-            exact: true,
-          },
-          {
             path: '/system/user',
             name: 'user',
             component: __IS_BROWSER
@@ -139,19 +126,6 @@ const routes = [
                     .default,
                 })
               : require('../System/User').default,
-            exact: true,
-          },
-          {
-            path: '/system/role',
-            name: 'role',
-            component: __IS_BROWSER
-              ? _dvaDynamic({
-                  component: () =>
-                    import(/* webpackChunkName: "p__System__Role" */ '../System/Role'),
-                  LoadingComponent: require('/Users/cashon/Documents/work/IoT/src/components/PageLoading/index')
-                    .default,
-                })
-              : require('../System/Role').default,
             exact: true,
           },
           {

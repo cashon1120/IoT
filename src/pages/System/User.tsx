@@ -49,7 +49,7 @@ IState > {
 
   columns = [
     {
-      title: '姓名',
+      title: '用户名',
       dataIndex: 'userName',
       key: 'userName'
     }, {
@@ -61,48 +61,24 @@ IState > {
       }
     }, {
       title: '联系方式',
-      dataIndex: 'phoneNo',
-      key: 'phoneNo'
+      dataIndex: 'phone',
+      key: 'phone'
     }, {
-      title: '所在部门',
-      dataIndex: 'departName',
-      key: 'departName'
-    }, {
-      title: '角色',
-      dataIndex: 'realName',
-      key: 'realName'
-    }, {
-      title: '状态',
-      dataIndex: 'status',
-      key: 'status',
-      render: (status : number) => {
-        let str = ''
-        switch (status) {
-          case 1:
-            str = '正常'
-            break;
-          case 2:
-            str = '禁用'
-            break;
-
-          default:
-            str = '注销'
-            break;
-        }
-        return str
-      }
+      title: '邮箱',
+      dataIndex: 'email',
+      key: 'email'
     }, {
       title: '添加时间',
-      dataIndex: 'createTime',
-      key: 'createTime'
+      dataIndex: 'crtAt',
+      key: 'crtAt'
     }, {
       title: '操作',
       width: 250,
       render: (record : any) => (
         <div className="table-operate">
           <a onClick={() => this.handleEdit(record)}>修改</a>
-          <a onClick={() => this.handleDisable(record.id)}>设置状态</a>
-          <a onClick={() => this.handleResetPwd(record.id)}>重置密码</a>
+          {/* <a onClick={() => this.handleDisable(record.id)}>设置状态</a>
+          <a onClick={() => this.handleResetPwd(record.id)}>重置密码</a> */}
         </div>
       )
     }

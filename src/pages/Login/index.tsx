@@ -27,7 +27,7 @@ class Login extends Component < FormProps, {} > {
     const callback = (res : any) => {
       if (res.code === 1) {
         sessionStorage.setItem('userName', userName)
-        dispatch(routerRedux.push({pathname: '/voltage/watch'}));
+        dispatch(routerRedux.push({pathname: '/product'}));
       } else {
         message.error(res.msg);
       }

@@ -61,21 +61,21 @@ export async function updateRole(params: object): Promise<{}> {
 
 // 用户
 export async function fetchUser(params: object): Promise<any> {
-  return request(API_URL + '/userManager/sysUserList', {
+  return request(API_URL + '/sysUser/userList', {
     method: 'POST',
     data: params,
   });
 }
 
 export async function addUser(params: object): Promise<any> {
-  return request(API_URL + '/userManager/saveSysUser', {
+  return request(API_URL + '/sysUser/save', {
     method: 'POST',
     data: params,
   });
 }
 
 export async function updateUser(params: object): Promise<any> {
-  return request(API_URL + '/userManager/editUserInfo', {
+  return request(API_URL + '/sysUser/editUserInfo', {
     method: 'POST',
     data: params,
   });

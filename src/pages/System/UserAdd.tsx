@@ -32,34 +32,34 @@ IState > {
   };
 
   componentDidMount() {
-    const {roleData, partmentData, nationalityData, dispatch} = this.props
-    if (roleData.length <= 0) {
-      dispatch({
-        type: 'global/fetchRole',
-        payload: {
-          pageNum: 1,
-          pageSize: 100
-        }
-      });
-    }
-    if (partmentData.length <= 0) {
-      dispatch({
-        type: 'global/fetchPartment',
-        payload: {
-          pageNum: 1,
-          pageSize: 100
-        }
-      });
-    }
-    if (nationalityData.length <= 0) {
-      dispatch({
-        type: 'global/fetchNationality',
-        payload: {
-          pageNum: 1,
-          pageSize: 100
-        }
-      });
-    }
+    // const {roleData, partmentData, nationalityData, dispatch} = this.props
+    // if (roleData.length <= 0) {
+    //   dispatch({
+    //     type: 'global/fetchRole',
+    //     payload: {
+    //       pageNum: 1,
+    //       pageSize: 100
+    //     }
+    //   });
+    // }
+    // if (partmentData.length <= 0) {
+    //   dispatch({
+    //     type: 'global/fetchPartment',
+    //     payload: {
+    //       pageNum: 1,
+    //       pageSize: 100
+    //     }
+    //   });
+    // }
+    // if (nationalityData.length <= 0) {
+    //   dispatch({
+    //     type: 'global/fetchNationality',
+    //     payload: {
+    //       pageNum: 1,
+    //       pageSize: 100
+    //     }
+    //   });
+    // }
   }
 
   handleSubmitModal = (fields : any) => {
@@ -91,18 +91,27 @@ IState > {
 
   modalFromColumns() {
     const {
-      nationalityData,
-      roleData,
       partmentData,
       modalData: {
+        id,
+        realName,
         userName,
-        notiality,
+        password,
         sex,
-        phoneNo,
-        roleId,
-        departId
+        phone,
+        email
       }
     } = this.props;
+
+    const passwordInput = !id ? {
+      title: '密码',
+      dataIndex: 'password',
+      componentType: 'Input',
+      initialValue: password,
+      requiredMessage: '请设置密码',
+      required: true,
+      placeholder: '请设置密码'
+    } : null
     return [
       {
         title: '用户姓名',
@@ -112,6 +121,14 @@ IState > {
         requiredMessage: '请输入用户姓名',
         required: true,
         placeholder: '请输入用户姓名'
+      },passwordInput, {
+        title: '真实姓名',
+        dataIndex: 'realName',
+        componentType: 'Input',
+        initialValue: realName,
+        requiredMessage: '请输入真实姓名',
+        required: true,
+        placeholder: '请输入真实姓名'
       }, {
         title: '性别',
         dataIndex: 'sex',
@@ -123,32 +140,18 @@ IState > {
         dataSource: SEX_TYPE
       }, {
         title: '联系电话',
-        dataIndex: 'phoneNo',
+        dataIndex: 'phone',
         componentType: 'Input',
-        initialValue: phoneNo,
+        initialValue: phone,
         requiredMessage: '请输入联系电话',
         required: true,
         placeholder: '请输入联系电话'
       }, {
-        title: '所在部门',
-        dataIndex: 'departId',
-        selectName: 'departName',
-        componentType: 'Select',
-        initialValue: departId,
-        requiredMessage: '请选择部门',
-        required: true,
-        placeholder: '请选择部门',
+        title: '邮箱',
+        dataIndex: 'email',
+        componentType: 'Input',
+        initialValue: email,
         dataSource: partmentData
-      }, {
-        title: '角色',
-        dataIndex: 'roleId',
-        selectName: 'roleName',
-        componentType: 'Select',
-        initialValue: roleId,
-        requiredMessage: '请选择角色',
-        required: true,
-        placeholder: '请选择角色',
-        dataSource: roleData
       }
     ];
   }

@@ -134,21 +134,21 @@ export default {
           icon: 'team',
           // authority: ['admin'],
           routes: [
-            {
-              path: '/system/partment',
-              name: 'partment',
-              component: './System/Partment',
-            },
+            // {
+            //   path: '/system/partment',
+            //   name: 'partment',
+            //   component: './System/Partment',
+            // },
             {
               path: '/system/user',
               name: 'user',
               component: './System/User',
             },
-            {
-              path: '/system/role',
-              name: 'role',
-              component: './System/Role',
-            },
+            // {
+            //   path: '/system/role',
+            //   name: 'role',
+            //   component: './System/Role',
+            // },
           ],
         },
         {

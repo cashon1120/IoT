@@ -52,7 +52,7 @@ const BasicLayout : React.FC < BasicLayoutProps > = props => {
    */
   const userName = sessionStorage.getItem('userName')
   if (!userName) {
-    // window.location.href = '/login';
+    window.location.href = '/login';
   }
 
   /**
